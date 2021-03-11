@@ -1,0 +1,28 @@
+﻿@page
+@model User_Stories_part_4.Pages.CreateUserStoryModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input asp-for="UserStoryToCreate.Title" type="text" class="form-control" id="Title" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea asp-for="UserStoryToCreate.Description" class="form-control" id="Description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="BusinessValue">Business value</label>
+        <input  asp-for="UserStoryToCreate.BusinessValue" type="number" class="form-control" id="BusinessValue" placeholder="Enter business value">
+    </div>
+    <div class="form-group">
+        <label for="Priority">Priority</label>
+        <input  asp-for="UserStoryToCreate.Priority" type="number" class="form-control" id="Priority" placeholder="Enter priority">
+    </div>
+    <div class="form-group">
+        <label for="StoryPoints">Story points</label>
+        <input  asp-for="UserStoryToCreate.StoryPoints" type="text" class="form-control" id="StoryPoints" placeholder="Enter story points">
+    </div>
+    <div asp-validation-summary="All"></div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

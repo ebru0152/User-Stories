@@ -1,0 +1,129 @@
+skinparam classAttributeIconSize 0
+
+MockStoryBoardProject *-- UserStory
+MockStoryBoardProject *-- StoryBoardProject
+UserStoryService --> MockStoryBoardProject
+StoryBoardService o-- UserStoryService
+StoryBoardService --> StoryBoardProject
+StoryBoardProject o-- UserStory
+IndexModel o-- UserStory
+IndexModel o-- StoryBoardService
+EditUserStoryModel o-- UserStory
+EditUserStoryModel o-- StoryBoardService
+DeleteUserStoryModel o-- UserStory
+DeleteUserStoryModel o-- StoryBoardService
+UserStoriesModel o-- UserStory
+UserStoriesModel o-- StoryBoardService
+CreateUserStoryModel o-- UserStory
+CreateUserStoryModel o-- StoryBoardService
+UserStoryDetailModel o-- UserStory
+UserStoryDetailModel o-- StoryBoardService
+ProjectModel o-- StoryBoardService
+
+class UserStory {
++Id : int
++Title : string
++Description : string
+-NextId {static} : int
++BusinessValue : int
++CreationDate : DateTime
++Priority : int
++StoryPoints : string
++AssignedPerson : string
++Status : enum
++CurrentStatus : Status
++GetStatusList() {static} : List<string>
+}
+
+class StoryBoardProject {
++ProjectName : string
++CreationDate : DateTime
++UserStories : List<UserStory> 
++Id : int
+-nextId {static} : int
+}
+
+class MockStoryBoardProject {
++UserStories {static} : List<UserStory>
++Projects {static} : List<StoryBoardProject>
++GetProjects() {static} : List<StoryBoardProject>
+}
+
+class UserStoryService {
+-UserStories : List<UserStory>
++AddUserStory(UserStory userStory)
++AddUserStories(List<UserStory> userStories)
++SetUserStoryList(List<UserStory> userStories)
++RemoveUserStory(UserStory userStory)
++CreateUserStory(string title, string description, int businessValue, int priority, string storyPoint)
++GetUserStories() : List<UserStory>
++GetUserStory(int id) : UserStory
++DeleteUserStory(int userStoryId) : UserStory
++UpdateUserStory(UserStory u)
+}
+
+class StoryBoardService {
++userStoryService {static} : UserStoryService
++ProjectTitle {static} : string
++storyBoardProjects {static} : List<StoryBoardProject>
++MyStoryBoardProject {static} : MyStoryBoardProject
++CreateProject(string title)
++GetProject() : StoryBoardProject
++GetProject(int id) : StoryBoardProject
++GetProjects() : List<StoryBoardProject>
++AssignProject(StoryBoardProject storyBoardProject)
+}
+
+class IndexModel {
++UserStoryToCreate : UserStory
++StoryBoardService : StoryBoardService
++OnGet()
++OnPost(string titleSearch)
++OutputCard(UserStory u)
+}
+
+class CreateUserStoryModel {
++UserStoryToCreate : UserStory
+-StoryBoardService : StoryBoardService
++OnGet()
++OnPost()
+}
+
+class DeleteUserStoryModel {
++UserStory : UserStory
+-StoryBoardService : StoryBoardService
++OnGet(int id)
++OnPost()
+}
+
+class EditUserStoryModel {
++UserStory : UserStory
+-StoryBoardService : StoryBoardService
++OnGet(int id)
++OnPost(int id)
+}
+
+class ProjectModel {
+-StoryBoardService : StoryBoardService
++Id : int
++Title : string
++OnGet()
++OnPost()
++OnPostCreate()
+}
+
+class UserStoriesModel {
++UserStoryToCreate : UserStory
+-StoryBoardService : StoryBoardService
++UserStories : List<UserStory>
++OnGet()
++OnPost(string titleSearch)
+}
+
+class UserStoryDetailModel {
++UserStoryToCreate : UserStory
+-StoryBoardService : StoryBoardService
++UserStories : List<UserStory>
++OnGet(int id)
+}
+

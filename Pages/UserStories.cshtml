@@ -1,0 +1,19 @@
+﻿@page
+@model User_Stories_part_4.Pages.UserStoriesModel
+@{
+}
+<h1>User Stories</h1>
+<a class="btn btn-primary my-3" type="button" asp-page="CreateUserStory">Create a new user story</a>
+<form method="post" class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="titleSearch">Search criteria (title)</label>
+        <input type="text" class="form-control" id="titleSearch" name="titleSearch" placeholder="Title to search">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Search</button>
+</form>
+
+
+@foreach (var userstory in @Model.UserStories)
+{
+    <partial name="Shared/_UserstoryCard.cshtml" model="userstory"/>
+}

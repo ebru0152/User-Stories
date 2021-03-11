@@ -1,0 +1,51 @@
+﻿@page "{handler?}"
+@using User_Stories_part_4.Models
+@using Microsoft.AspNetCore.Html
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <h1>User Stories</h1>
+    <a class="btn btn-primary my-3" type="button" asp-page="CreateUserStory">Create a new user story</a>
+    <form method="post" class="form-inline">
+        <div class="form-group mb-3">
+            <label for="titleSearch">Search criteria (title)</label>
+            <input type="text" class="form-control" id="titleSearch" name="titleSearch" placeholder="Title to search">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+
+    <div class="row">
+        <div class="col-sm border border-primary">
+            <h1>To do:</h1>
+            @foreach (var userstory in Model.UserStories.Where(x => x.CurrentStatus == UserStory.Status.ToDo))
+            {
+                {
+                    <partial name="Shared/_UserstoryCard.cshtml" model="userstory" />
+
+                }
+            }
+
+        </div>
+        <div class="col-sm border border-primary">
+            <h1>Doing:</h1>
+            @foreach (var userstory in Model.UserStories.Where(x => x.CurrentStatus != UserStory.Status.ToDo && x.CurrentStatus != UserStory.Status.CompletlyDone))
+            {
+                {
+                    <partial name="Shared/_UserstoryCard.cshtml" model="userstory" />
+
+                }
+            }
+        </div>
+        <div class="col-sm border border-primary">
+            <h1>Done:</h1>
+            @foreach (var userstory in Model.UserStories.Where(x => x.CurrentStatus == UserStory.Status.CompletlyDone))
+            {
+                {
+                    <partial name="Shared/_UserstoryCard.cshtml" model="userstory" />
+
+                }
+            }
+        </div>
+    </div>
